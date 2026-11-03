@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/css/style cadastro.css" />
+</head>
+
+<body>
+
+    <nav class="menu">
+        <a href="index.html" class="link">Home</a>
+        <a href="galeria.html" class="link">Galeria</a>
+        <a href="chat.html" class="link">Chat</a>
+        <a href="cadastro.html" class="link">Cadastro</a>
+        <a href="login.html" class="link">Login</a>
+    </nav>
+
+
+    <div class="container">
+        <div class="campo-grupo">
+            <label for="usuario" class="h2">Nome do usuario</label>
+            <input type="text" id="usuario" placeholder="Digite seu nome">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="email" class="h2">E-mail</label>
+            <input type="email" id="email" placeholder="Digite seu e-mail">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="senha" class="h2">Senha</label>
+            <input type="password" id="senha" placeholder="crie a senha deve ter 6 caracteres ou mais">
+        </div>
+
+        <button id="btnCadastro" class="btn-enviar">Enviar</button>
+        <div id="cadMensagem" class="mensagem"></div>
+        <div id="cadAlerta" class="alerta"></div>
+    </div>
+
+    <footer>&copy; Desenvolvido por Gustavo Almeida - 2026 - Curitiba</footer>
+
+    <script>
+        const btnCadastro = document.querySelector('#btnCadastro');
+        const cadMensagem = document.querySelector('#cadMensagem');
+        const cadAlerta = document.querySelector('#cadAlerta');
+
+        btnCadastro.addEventListener('click', async () => {
+            const usuarioEntrada = document.querySelector('#usuario');
+            const emailEntrada = document.querySelector('#email');
+            const senhaEntrada = document.querySelector('#senha');
+
+            const usuarioDigitado = usuarioEntrada.value.trim();
+            const emailDigitado = emailEntrada.value.trim();
+            const senhaDigitada = senhaEntrada.value;
+
+            // Limpa alertas anteriores
+            cadAlerta.innerText = '';
+
+            // Validação de campos vazios
+            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+                cadMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+                cadMensagem.style.color = 'red';
+                return;
+            }
+
+            // Validação de tamanho da senha
+            if (senhaDigitada.length < 6) {
+                cadMensagem.innerText = 'A senha deve ter pelo menos 6 caracteres!';
+                cadMensagem.style.color = 'red';
+                return;
+            }
+
+            cadMensagem.innerText = 'Aguarde, cadastrando no servidor...';
+            cadMensagem.style.color = '#01132b';
+
+            try {
+                const respostaBe = await fetch('/cadastro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        usuario: usuarioDigitado,
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+
+                if (!respostaBe.ok) {
+                    cadMensagem.innerText = `${dados.erro}`;
+                    cadMensagem.style.color = 'red';
+                    return;
+                }
+
+                cadMensagem.innerText = `${dados.mensagem}: ${dados.PERFIL}`;
+                cadMensagem.style.color = 'green';
+
+                // Após o cadastro, encaminha o usuário para a tela de Login.
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                cadMensagem.innerText = 'Erro ao conectar com o servidor!';
+                cadMensagem.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style login.css">
+</head>
+
+<body>
+
+    <nav class="menu">
+        <a href="index.html" class="link">Home</a>
+        <a href="galeria.html" class="link">Galeria</a>
+        <a href="chat.html" class="link">Chat</a>
+        <a href="cadastro.html" class="link">Cadastro</a>
+        <a href="login.html" class="link">Login</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="campo-grupo">
+            <label for="loginEmail" class="h2">E-mail</label>
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Digite seu e-mail"
+            >
+        </div>
+
+        <div class="campo-grupo">
+            <label for="loginSenha" class="h2">Senha</label>
+            <input
+                type="password"
+                id="loginSenha"
+                placeholder="Digite sua senha"
+            >
+        </div>
+
+        <button type="button" id="btnLogin" class="btn-enviar">
+            Entrar
+        </button>
+
+        <div id="loginMensagem" class="container-resposta"></div>
+
+    </div>
+
+    <script>
+
+        const btnLogin = document.querySelector('#btnLogin');
+        const loginMensagem = document.querySelector('#loginMensagem');
+
+        btnLogin.addEventListener('click', async () => {
+
+            const emailEntrada = document.querySelector('#loginEmail');
+            const senhaEntrada = document.querySelector('#loginSenha');
+
+            const emailDigitado = emailEntrada.value.trim();
+            const senhaDigitada = senhaEntrada.value;
+
+            if (!emailDigitado || !senhaDigitada) {
+                loginMensagem.innerText =
+                    'Preencha todos os campos antes de enviar!';
+                loginMensagem.style.color = 'red';
+                return;
+            }
+
+            try {
+
+                const respostaBe = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+
+                if (!respostaBe.ok) {
+                    loginMensagem.innerText = dados.erro;
+                    loginMensagem.style.color = 'red';
+                    return;
+                }
+
+                loginMensagem.innerText =
+                    `${dados.mensagem} ${dados.usuario}. Entrando no chat...`;
+
+                loginMensagem.style.color = 'green';
+
+                localStorage.setItem('usuarioLogado', dados.usuario);
+
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+                setTimeout(() => {
+                    window.location.href = 'chat.html';
+                }, 1000);
+
+            } catch (erro) {
+
+                console.error('Erro na requisição:', erro);
+
+                loginMensagem.innerText =
+                    'Erro ao conectar com o servidor!';
+
+                loginMensagem.style.color = 'red';
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
