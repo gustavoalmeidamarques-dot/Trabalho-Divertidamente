@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+:root{
+--fundo: #0F172A; /* Azul bem escuro */
+--card: #1E3A5F; /* Azul profundo */
+--azul-principal: #5DA9E9; /* Azul da Tristeza */
+--azul-claro: #A7D8FF; /* Destaques */
+--branco-gelo: #F1F5F9; /* Texto principal */
+--cinza-claro: #CBD5E1; /* Texto secundário */
+--cinza-azulado: #64748B; /* Bordas */
+--brilho: #7DD3FC; /* Efeito glow */
+--escuro-total: #01132b;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--card);
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    background-color: rgba(30,30,36,0.55);
+    padding: 20px;
+    text-align: center;
+    font-style: 'bangers';
+    z-index: 1000;
+}
+
+.link{
+    font-family: "amatic sc";
+    text-decoration: none;
+    font-size: 3.0rem;
+    letter-spacing: 2px;
+    margin: 0 15px;
+    color: rgb(0, 90, 126);
+    
+}
+
+.link:hover{
+    color: #00c3ff;
+    transition: all 0.3s ease;
+}
+
+.vitrine{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 200px;
+    max-width: 1200px;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+.container-chat{
+    max-width: 550px;
+    margin: 20px auto;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--azul-principal);
+    border-radius: 11px;
+    border: 3px solid var(--azul-claro);
+    overflow: hidden;
+}
+.janela-msg{
+    flex: 1;
+    padding: 20px;
+    background-size: cover;
+    text-align: center;
+    margin: 0 auto;
+}
+.mensagem{
+    margin: 50px;
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    border: 3px solid var(--azul-claro);
+    font-family: 'caveat';
+}
+.mensagem.usuario{
+    background-color: rgb(3, 1, 20);
+    color: aliceblue;
+    align-self: flex-end;
+}
+.formulario-envio{
+    display: flex;
+    padding: 15px;
+    background-color: var(--fundo);
+    gap: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+
+   
+    font-size: 1.2rem;
+
+    color: var(--cinza-claro);
+}
+
+.container-chat {
+    width: min(700px, 92%);
+}
+
+.janela-msg {
+    overflow-y: auto;
+    min-height: 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.mensagem {
+    margin: 12px 0;
+    width: fit-content;
+    max-width: 80%;
+}
+
+.mensagem.usuario {
+    margin-left: auto;
+}
+
+.formulario-envio input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--azul-claro);
+    border-radius: 8px;
+}
+
+.formulario-envio button {
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.formulario-envio button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+/* =========================
+   RESPONSIVIDADE - CELULARES
+   ========================= */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media (max-width: 767px) {
+    .menu {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px 14px;
+        padding: 12px 10px;
+    }
+
+    .menu .link {
+        font-size: clamp(1.35rem, 6vw, 2rem);
+        margin: 0 4px;
+        letter-spacing: 1px;
+    }
+
+    .vitrine {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 520px;
+        padding: 20px 14px;
+        gap: 18px;
+    }
+
+    .vitrine article {
+        width: 100%;
+        min-width: 0;
+        padding: 24px 18px;
+    }
+
+    .vitrine article .imagem {
+        width: 100%;
+        height: 220px;
+        object-fit: contain;
+    }
+
+    .personagem-cinco {
+        height: auto;
+        min-height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 18px;
+        padding: 28px 16px;
+    }
+
+    .esquerdo,
+    .direito {
+        width: 100%;
+        max-width: 440px;
+        height: auto;
+        max-height: none;
+        margin: 0;
+        padding: 12px;
+        right: auto;
+        text-align: center;
+    }
+
+    .titulo {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+        letter-spacing: 2px;
+    }
+
+    .subtitulo {
+        font-size: 1.2rem;
+    }
+
+    .Tristeza-front {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: min(75vw, 320px);
+        max-height: 360px;
+        object-fit: contain;
+        order: 2;
+    }
+
+    .balao {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto 18px;
+        right: auto;
+        padding: 16px 20px;
+    }
+
+    .botão {
+        display: inline-block;
+        width: min(100%, 250px);
+    }
+
+    .container,
+    .login-container {
+        width: calc(100% - 28px);
+        max-width: 440px;
+        margin: 22px auto;
+        padding: 22px 18px;
+    }
+
+    .container input,
+    .login-container input,
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        max-width: 100%;
+    }
+
+    .container-chat {
+        width: calc(100% - 20px);
+        max-width: 100%;
+        margin: 14px auto;
+        padding: 12px;
+    }
+
+    .janela-msg {
+        min-height: 50vh;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .formulario-envio {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .formulario-envio input {
+        flex: 1 1 180px;
+        min-width: 0;
+    }
+
+    .formulario-envio button {
+        flex: 0 0 auto;
+    }
+
+    footer {
+        padding: 14px 10px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/* MENU RESPONSIVO */
+.menu-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.menu-toggle {
+    display: none;
+    border: 2px solid rgba(167, 216, 255, 0.7);
+    border-radius: 10px;
+    background: rgba(10, 20, 50, 0.75);
+    color: #a7d8ff;
+    width: 48px;
+    height: 44px;
+    padding: 9px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-toggle:focus-visible,
+.menu .link:focus-visible {
+    outline: 3px solid #7dd3fc;
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+    .menu {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 14px;
+        text-align: center;
+        background-color: rgba(20, 20, 38, 0.94);
+        backdrop-filter: blur(8px);
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 0 8px;
+    }
+
+    .menu.open .menu-links {
+        display: flex;
+    }
+
+    .menu .link {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 7px 10px;
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        line-height: 1.15;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .menu.open .menu-toggle span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu.open .menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu.open .menu-toggle span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
