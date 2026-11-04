@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conheça a emoção</title>
+    <link rel="stylesheet" href="/css/style personagem.css">
+    <script src="/js/personagem.js" defer></script>
+    <script src="/js/menu.js" defer></script>
+</head>
+<body>
+    <nav class="menu" aria-label="Menu principal">
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-links">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="menu-links" id="menu-links">
+            <a class="link" href="index.html">Home</a>
+            <a class="link" href="/galeria.html">Galeria</a>
+            <a class="link" href="chat.html">Chat</a>
+            <a class="link" href="cadastro.html">Cadastro</a>
+            <a class="link" href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <main class="cenario">
+        <div class="chamada-cenario">
+            <span class="etiqueta">CENTRAL DAS EMOÇÕES</span>
+            <h1>Dentro da mente da Riley</h1>
+            <p>Conheça um pouquinho mais sobre cada emoção.</p>
+        </div>
+
+        <section class="painel-personagem" aria-labelledby="nome-personagem">
+            <div class="informacoes">
+                <span class="etiqueta" id="tipo-emocao">UMA DAS EMOÇÕES</span>
+                <h2 id="nome-personagem">Carregando...</h2>
+                <p id="descricao-personagem"></p>
+                <div class="curiosidade">
+                    <h3>O que essa emoção faz?</h3>
+                    <p id="funcao-personagem"></p>
+                </div>
+                <a class="botao-voltar" href="/galeria.html">Voltar para a galeria</a>
+            </div>
+        </section>
+        <p class="rodape-cenario">Cada emoção tem seu papel na construção de quem somos.</p>
+    </main>
+</body>
+</html>
